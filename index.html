@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solizon - 未来を創造するテクノロジーカンパニー</title>
+    <style>
+        /* 全体のスタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            padding-top: 70px; /* ナビゲーションバーの高さ分のパディング */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        section {
+            padding: 100px 0;
+            position: relative;
+            scroll-margin-top: 70px; /* ナビゲーションバーの高さ分のスクロールマージン */
+        }
+        
+        /* ナビゲーションバー */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e67e22;
+            text-decoration: none;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .navbar-menu li {
+            margin-left: 30px;
+        }
+        
+        .navbar-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-menu li a:hover {
+            color: #e67e22;
+        }
+        
+        .navbar-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-menu li a:hover::after,
+        .navbar-menu li a.active::after {
+            width: 100%;
+        }
+        
+        .navbar-menu li a.active {
+            color: #e67e22;
+        }
+        
+        .navbar-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .navbar-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+            
+            .navbar-menu.active {
+                left: 0;
+            }
+            
+            .navbar-menu li {
+                margin: 20px 0;
+            }
+            
+            .navbar-toggle {
+                display: block;
+            }
+            
+            .navbar-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .navbar-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .navbar-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+        }
+        
+        /* ヒーローセクション */
+        .hero {
+            position: relative;
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background-image: 
+                repeating-linear-gradient(100deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.1) 7%, transparent 10%, transparent 12%, rgba(255,255,255,0.1) 16%),
+                repeating-linear-gradient(100deg, #f39c12 10%, #e67e22 15%, #f5b041 20%, #e67e22 25%, #d35400 30%);
+            background-size: 300%, 200%;
+            background-position: 50% 50%, 50% 50%;
+            filter: blur(10px);
+            opacity: 0.7;
+            z-index: 1;
+            animation: aurora 60s linear infinite;
+            mask-image: radial-gradient(ellipse at 100% 0%, black 10%, transparent 70%);
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(100deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.1) 7%, transparent 10%, transparent 12%, rgba(255,255,255,0.1) 16%),
+                repeating-linear-gradient(100deg, #f39c12 10%, #e67e22 15%, #f5b041 20%, #e67e22 25%, #d35400 30%);
+            background-size: 200%, 100%;
+            mix-blend-mode: difference;
+            animation: aurora 60s linear infinite;
+            background-attachment: fixed;
+            opacity: 0.5;
+            z-index: 2;
+        }
+        
+        @keyframes aurora {
+            from {
+                background-position: 50% 50%, 50% 50%;
+            }
+            to {
+                background-position: 350% 50%, 350% 50%;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #fff;
+            color: #e67e22;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 15;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cta-button:hover {
+            background-color: #f8f8f8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* セクションタイトル共通スタイル */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #d35400;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #f39c12;
+            border-radius: 3px;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* ハイライトセクション */
+        .highlights {
+            background-color: #fff;
+            position: relative;
+            z-index: 20;
+            text-align: center;
+        }
+        
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        @media (min-width: 768px) {
+            .highlight-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .highlight-item {
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .highlight-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: #f39c12;
+        }
+        
+        .highlight-icon {
+            font-size: 40px;
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+        
+        .highlight-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-desc {
+            color: #666;
+        }
+        
+        /* サービスセクション */
+        .services {
+            background-color: #f9f9f9;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .feature-item {
+            padding: 40px 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+        
+        .feature-item:hover .feature-gradient {
+            opacity: 1;
+        }
+        
+        .feature-item:hover .feature-title span {
+            transform: translateX(8px);
+        }
+        
+        .feature-item:hover .feature-bar {
+            height: 32px;
+            background-color: #f39c12;
+        }
+        
+        /* 境界線 */
+        .feature-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (min-width: 992px) {
+            .feature-item:nth-child(4n+1),
+            .feature-item:nth-child(4n) {
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            
+            .feature-item:nth-child(n+5) {
+                border-bottom: none;
+            }
+            
+            .feature-item {
+                border-right: 1px solid rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 991px) {
+            .feature-item:nth-child(2n+1) {
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            
+            .feature-item:nth-child(n+7) {
+                border-bottom: none;
+            }
+            
+            .feature-item {
+                border-right: 1px solid rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        .feature-gradient {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(249, 249, 249, 0), rgba(249, 249, 249, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .feature-icon {
+            margin-bottom: 20px;
+            font-size: 30px;
+            color: #e67e22;
+            padding-left: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-bar {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background-color: #ccc;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-title span {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .feature-desc {
+            font-size: 15px;
+            color: #666;
+            padding-left: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 流れのセクション */
+        .flow {
+            background-color: #fff;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .flow-steps {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .flow-steps::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            width: 2px;
+            background-color: #f0f0f0;
+        }
+        
+        @media (min-width: 768px) {
+            .flow-steps::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        
+        .flow-step {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 60px;
+        }
+        
+        @media (min-width: 768px) {
+            .flow-step {
+                padding-left: 0;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .flow-step:nth-child(odd) .flow-content {
+                margin-left: 60px;
+                text-align: left;
+            }
+            
+            .flow-step:nth-child(even) .flow-content {
+                margin-right: 60px;
+                text-align: right;
+                order: -1;
+            }
+        }
+        
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .flow-number {
+            background-color: #f39c12;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        @media (min-width: 768px) {
+            .flow-number {
+                position: relative;
+                margin: 0 20px;
+            }
+        }
+        
+        .flow-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .flow-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        
+        /* 下部CTA */
+        .bottom-cta {
+            background-color: #f39c12;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bottom-cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .bottom-cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .bottom-cta p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .white-button {
+            display: inline-block;
+            background-color: white;
+            color: #f39c12;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .white-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* お問い合わせセクション */
+        .contact {
+            padding: 100px 0;
+            background-color: #fff;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        
+        @media (min-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #f39c12;
+            box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.2);
+            outline: none;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-form button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            background-color: #e67e22;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-info-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info-icon {
+            color: #f39c12;
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-info-content h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .contact-info-content p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* フッター */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .copyright {
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="navbar-logo">Solizon</a>
+            <ul class="navbar-menu">
+                <li><a href="#home" class="active">ホーム</a></li>
+                <li><a href="#highlights">強み</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#flow">導入の流れ</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="navbar-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <!-- ヒーローセクション（ヘッダー） -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>ITの力で、ビジネスに革新を</h1>
+            <p>Solizonは最先端テクノロジーと創造力で、企業のデジタル変革を支援します。</p>
+            <a href="#contact" class="cta-button">無料相談はこちら</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 17.414l-6.707-6.707 1.414-1.414L12 14.586l5.293-5.293 1.414 1.414z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ハイライトセクション -->
+    <section class="highlights" id="highlights">
+        <div class="container">
+            <div class="section-title">
+                <h2>Solizonが選ばれる理由</h2>
+                <p>多くの企業に選ばれる3つの強み</p>
+            </div>
+            <div class="highlight-grid">
+                <div class="highlight-item">
+                    <div class="highlight-icon">✓</div>
+                    <div class="highlight-title">技術力</div>
+                    <p class="highlight-desc">最新技術に精通したエンジニアがお客様のニーズに合わせた最適なソリューションを提供します。</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">✓</div>
+                    <div class="highlight-title">伴走型サポート</div>
+                    <p class="highlight-desc">導入前の相談から運用まで、お客様のビジネスに寄り添った継続的なサポートを提供します。</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">✓</div>
+                    <div class="highlight-title">柔軟な対応力</div>
+                    <p class="highlight-desc">お客様の状況やフェーズに合わせて柔軟に対応し、最適なプランをご提案します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- サービスセクション -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>提供サービス</h2>
+                <p>お客様のビジネス課題を解決する多様なソリューション</p>
+            </div>
+            <div class="services-grid">
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>クラウドソリューション</span>
+                    </div>
+                    <p class="feature-desc">最新のクラウド技術を活用し、ビジネスの効率化とコスト削減を実現します。セキュアで拡張性の高いプラットフォームを提供します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>AI活用支援</span>
+                    </div>
+                    <p class="feature-desc">最先端のAI技術を活用し、データ分析から業務自動化まで、お客様のビジネス課題を解決します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>モバイルアプリ開発</span>
+                    </div>
+                    <p class="feature-desc">使いやすく美しいモバイルアプリケーションの開発から運用まで、ワンストップで対応します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>DX戦略コンサルティング</span>
+                    </div>
+                    <p class="feature-desc">デジタルトランスフォーメーション戦略の策定から実装まで、企業の変革を総合的に支援します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>セキュリティ対策</span>
+                    </div>
+                    <p class="feature-desc">サイバーセキュリティの専門家が、最新の脅威に対する包括的な防御策を提供します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>IoTソリューション</span>
+                    </div>
+                    <p class="feature-desc">IoTデバイスとクラウドの連携により、リアルタイムデータ活用と業務効率化を実現します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>ブロックチェーン技術</span>
+                    </div>
+                    <p class="feature-desc">セキュアで透明性の高いブロックチェーン技術を活用した、次世代のビジネスソリューションを提供します。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-gradient"></div>
+                    <div class="feature-icon">★</div>
+                    <div class="feature-title">
+                        <div class="feature-bar"></div>
+                        <span>24時間サポート</span>
+                    </div>
+                    <p class="feature-desc">専門スタッフによる24時間365日のサポート体制で、お客様のビジネスを常時バックアップします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入の流れセクション -->
+    <section class="flow" id="flow">
+        <div class="container">
+            <div class="section-title">
+                <h2>導入の流れ</h2>
+                <p>お問い合わせから導入までのステップ</p>
+            </div>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <div class="flow-title">無料相談</div>
+                        <p>まずはお気軽にお問い合わせください。現状の課題やニーズをヒアリングします。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <div class="flow-title">要件定義・提案</div>
+                        <p>ヒアリング内容をもとに、最適なソリューションと導入計画をご提案します。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <div class="flow-title">開発・構築</div>
+                        <p>お客様の要件に合わせたシステム開発や環境構築を行います。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-number">4</div>
+                    <div class="flow-content">
+                        <div class="flow-title">導入・運用サポート</div>
+                        <p>スムーズな導入をサポートし、その後の運用・保守も継続的にサポートします。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下部CTA -->
+    <section class="bottom-cta">
+        <div class="container">
+            <h2>今すぐビジネスを変革しませんか？</h2>
+            <p>Solizonの専門チームが、お客様のビジネス課題解決をサポートします。まずは無料相談からお気軽にどうぞ。</p>
+            <a href="#contact" class="white-button">無料相談はこちら</a>
+        </div>
+    </section>
+
+    <!-- お問い合わせセクション -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>お問い合わせ</h2>
+                <p>ご質問やご相談がございましたら、お気軽にお問い合わせください</p>
+            </div>
+            <div class="contact-grid">
+                <form class="contact-form">
+                    <input type="text" placeholder="お名前" required>
+                    <input type="email" placeholder="メールアドレス" required>
+                    <input type="text" placeholder="会社名">
+                    <input type="tel" placeholder="電話番号">
+                    <textarea placeholder="お問い合わせ内容" required></textarea>
+                    <button type="submit">送信する</button>
+                </form>
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">◆</div>
+                        <div class="contact-info-content">
+                            <h3>住所</h3>
+                            <p>〒107-0062<br>東京都港区南青山1-2-3<br>Solizonビル</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">◆</div>
+                        <div class="contact-info-content">
+                            <h3>連絡先</h3>
+                            <p>電話：03-1234-5678<br>メール：info@solizon.co.jp</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">◆</div>
+                        <div class="contact-info-content">
+                            <h3>営業時間</h3>
+                            <p>平日 9:00〜18:00<br>土日祝日 休業</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2025 株式会社Solizon All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // スムーズスクロール
+        document.addEventListener('DOMContentLoaded', function() {
+            // ナビゲーションメニュー内のリンクのみにスムーズスクロールを適用
+            document.querySelectorAll('.navbar-menu a, .hero a[href^="#"], .bottom-cta a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // ナビゲーションバーの高さを考慮
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // モバイルメニュートグル
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            
+            navbarToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navbarMenu.classList.toggle('active');
+            });
+            
+            // メニュー項目クリック時にモバイルメニューを閉じる
+            document.querySelectorAll('.navbar-menu li a').forEach(item => {
+                item.addEventListener('click', function() {
+                    navbarToggle.classList.remove('active');
+                    navbarMenu.classList.remove('active');
+                });
+            });
+            
+            // スクロール時のアクティブメニュー更新
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.navbar-menu li a');
+            
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
