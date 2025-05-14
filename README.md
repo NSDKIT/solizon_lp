@@ -11,3 +11,4 @@
 # _internship_dashboard
 # _internship_comp
 # _internship_comp
+# solizon_lp
