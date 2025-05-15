@@ -42,9 +42,8 @@ Solizonは、ITの力で企業の課題を解決する革新的なテクノロ�
 
 ## 📝 ファイル構成
 
-solizon-landing/
-├── index.html        ← 本LPの全コードが集約されたファイル
-├── README.md         ← このファイル
+index.html : 本LPの全コードが集約されたファイル
+README.md : 概要書
 
 ---
 
