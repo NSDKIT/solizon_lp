@@ -42,8 +42,8 @@ Solizonは、ITの力で企業の課題を解決する革新的なテクノロ�
 
 ## 📝 ファイル構成
 
-index.html : 本LPの全コードが集約されたファイル
-README.md : 概要書
+- index.html : 本LPの全コードが集約されたファイル
+- README.md : 概要書
 
 ---
 
