@@ -31,19 +31,12 @@ Solizonは、ITの力で企業の課題を解決する革新的なテクノロ�
 
 ## 🚀 公開方法
 
-### 1. Netlify を使ったデプロイ（おすすめ）
+### Netlify を使ったデプロイ
 
 1. [Netlify](https://www.netlify.com/) にサインアップ
 2. 「New Site from Git」で本リポジトリを選択
 3. Build Command：**なし**、Publish Directory：**/** を指定
 4. 自動デプロイされ、`https://your-site-name.netlify.app` にて公開完了！
-
-### 2. GitHub Pages（無料・シンプル）
-
-1. 本リポジトリを GitHub にプッシュ
-2. リポジトリの Settings > Pages を開く
-3. 「Source: `main` branch / root」を選択して保存
-4. 数分後、`https://ユーザー名.github.io/リポジトリ名/` でアクセス可能
 
 ---
 
